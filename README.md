@@ -51,7 +51,7 @@
 - Razorpay
 
 ## Information
-    Use this login information formation for access the Admin features
+Use this login information formation for access the Admin features
 - admin email: `imvikashkk@gmail.com`
 - password: `VikashShopex2024@`
 
