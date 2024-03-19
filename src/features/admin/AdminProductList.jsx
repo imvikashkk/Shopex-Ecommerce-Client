@@ -12,23 +12,14 @@ import {
   selectCategories,
   selectTotalItems,
 } from "../product/productSlice";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  StarIcon,
-} from "@heroicons/react/20/solid";
+import { Menu, Transition } from "@headlessui/react";
+import { StarIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
-import Pagination from "../common/Pagination"
-import DesktopFilter from "../product/component/DesktopFilter"
-import MobileFilter from "../product/component/MobileFilter"
-import ProductGrid from "../product/component/ProductGrid"
+import { ChevronDownIcon, Squares2X2Icon } from "@heroicons/react/20/solid";
+import Pagination from "../common/Pagination";
+import DesktopFilter from "../product/component/DesktopFilter";
+import MobileFilter from "../product/component/MobileFilter";
+import { Grid } from "react-loader-spinner";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -225,5 +216,104 @@ function AdminProductList() {
   );
 }
 
+/* eslint-disable react/prop-types */
+
+function ProductGrid({ products, status }) {
+  return (
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+          {status === "loading" ? (
+            <Grid
+              height="80"
+              width="80"
+              color="rgb(79, 70, 229) "
+              ariaLabel="grid-loading"
+              radius="12.5"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
+          ) : null}
+          {products.map((product) => (
+            <div key={product.id} className="relative">
+              <Link to={`/product-detail/${product.id}`}>
+                <div className="group relative p-2 shadow-product">
+                  <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-25 lg:h-60">
+                    <img
+                      src={product?.thumbnail}
+                      alt={product?.title}
+                      className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    />
+                  </div>
+                  <div className="mt-4 flex justify-between">
+                    <div>
+                      <h3 className="text-sm text-gray-700">
+                        <div href={product?.thumbnail}>
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0"
+                          />
+                          {product?.title}
+                        </div>
+                      </h3>
+                      <p className="mt-1 text-sm text-gray-500">
+                        <StarIcon className="w-6 h-6 inline"></StarIcon>
+                        <span className=" align-bottom">{product?.rating}</span>
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm block font-medium text-gray-900">
+                        {Math.round(
+                          product?.price -
+                            product?.price * (product?.discountPercentage / 100)
+                        ).toLocaleString("en-IN", {
+                          style: "currency",
+                          currency: "INR",
+                        })}
+                      </p>
+                      <p className="text-sm block line-through font-medium text-gray-400">
+                        {product?.price?.toLocaleString("en-IN", {
+                          style: "currency",
+                          currency: "INR",
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                  {product?.deleted && (
+                    <div>
+                      <p className="text-sm text-red-400">product deleted</p>
+                    </div>
+                  )}
+                  {product?.stock <= 0 && (
+                    <div>
+                      <p className="text-sm text-red-400">out of stock</p>
+                    </div>
+                  )}
+                </div>
+              </Link>
+              <Link className="absolute hover:bg-indigo-800 bg-indigo-950 h-10 w-10 p-3 grid place-content-center rounded-[1.25rem] top-2 right-2 z-10"
+                to={`/admin/product-form/edit/${product.id}`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  className="w-7 h-7 stroke-[#888] hover:stroke-[#eee]">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                  />
+                </svg>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default AdminProductList;

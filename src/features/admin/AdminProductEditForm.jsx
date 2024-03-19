@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from "react-redux";
 import {
-  clearSelectedProduct,
-  createProductAsync,
   fetchProductByIdAsync,
   selectBrands,
   selectCategories,

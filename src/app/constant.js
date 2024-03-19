@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://shopex-ecommerce-server.vercel.app"
+export const BACKEND_URL = "api-shopexnow.vercel.app"
