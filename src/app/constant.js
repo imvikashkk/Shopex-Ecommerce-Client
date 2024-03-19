@@ -1,1 +1,1 @@
-export const BACKEND_URL = "api-shopexnow.vercel.app"
+export const BACKEND_URL = "https://api-shopexnow.vercel.app"
