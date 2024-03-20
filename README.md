@@ -3,9 +3,6 @@
 
 [https://shopexnow.vercel.app/](https://shopexnow.vercel.app/ "https://shopexnow.vercel.app/")
 
-Backend aws hosting
-[http://13.200.30.248:8080/](http://13.200.30.248:8080/ "http://13.200.30.248:8080/")
-
 Backend vercel hosting
 [https://api-shopexnow.vercel.app](https://api-shopexnow.vercel.app/ "https://api-shopexnow.vercel.app/")
 
