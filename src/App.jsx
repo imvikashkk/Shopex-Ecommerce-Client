@@ -52,17 +52,13 @@ const router = createBrowserRouter([
   {
     path: "/forgot-password",
     element: (
-      <Unprotected>
         <ForgotPasswordPage></ForgotPasswordPage>
-      </Unprotected>
     ),
   },
   {
     path: "/reset-password",
     element: (
-      <Unprotected>
         <ResetPasswordPage></ResetPasswordPage>
-      </Unprotected>
     ),
   },
   {
