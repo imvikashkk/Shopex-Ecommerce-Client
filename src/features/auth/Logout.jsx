@@ -11,7 +11,7 @@ function Logout() {
   useEffect(() => {
     dispatch(resetAuth());
     localStorage.removeItem('authorization');
-    persistor.pause();
+    // persistor.pause();
     persistor.flush().then(() => {
       return persistor.purge();
     });
