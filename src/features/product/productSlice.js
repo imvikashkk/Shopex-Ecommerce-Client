@@ -126,7 +126,6 @@ const productSlice = createSlice({
       .addCase(fetchCategoriesAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.categories = action.payload;
-        console.log(action.payload);
       })
       .addCase(fetchProductByIdAsync.pending, (state) => {
         state.status = "loading";
