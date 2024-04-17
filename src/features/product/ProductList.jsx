@@ -13,10 +13,7 @@ import {
   selectTotalItems,
 } from "./productSlice";
 import { Menu, Transition } from "@headlessui/react";
-import {
-  ChevronDownIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/20/solid";
+import { ChevronDownIcon, Squares2X2Icon } from "@heroicons/react/20/solid";
 import Pagination from "../common/Pagination";
 import MobileFilter from "./component/MobileFilter";
 import DesktopFilter from "./component/DesktopFilter";
@@ -117,13 +114,11 @@ export default function ProductList() {
           mobileFiltersOpen={mobileFiltersOpen}
           setMobileFiltersOpen={setMobileFiltersOpen}
           filters={filters}></MobileFilter>
-
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b-2 border-gray-200 pb-6 pt-8">
             <h1 className="text-3xl font-bold tracking-tight text-white font-serif custom-text-shadow select-none">
               All Products
             </h1>
-
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
@@ -135,7 +130,6 @@ export default function ProductList() {
                     />
                   </Menu.Button>
                 </div>
-
                 <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"
@@ -192,7 +186,6 @@ export default function ProductList() {
               </div>
             </div>
           </section>
-
           <Pagination
             page={page}
             setPage={setPage}
@@ -203,5 +196,3 @@ export default function ProductList() {
     </div>
   );
 }
-
-

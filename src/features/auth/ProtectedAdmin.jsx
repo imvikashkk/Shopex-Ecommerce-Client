@@ -1,11 +1,18 @@
 /* eslint-disable react/prop-types */
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { selectLoggedInUser } from './authSlice';
 import { selectUserInfo } from '../user/userSlice';
+import { fetchLoggedInUserAsync } from "../user/userSlice";
+import { useEffect } from 'react';
 
 function ProtectedAdmin({ children }) {
-  const user = useSelector(selectLoggedInUser);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!localStorage.getItem("authorization")) {
+      dispatch(fetchLoggedInUserAsync());
+    }
+  }, [dispatch]);
+  const user = localStorage.getItem("authorization");
   const userInfo = useSelector(selectUserInfo)
 
   if (!user) {

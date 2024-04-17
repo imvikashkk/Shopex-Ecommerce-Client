@@ -63,7 +63,7 @@ export const signOutAsync = createAsyncThunk("user/signOut", async () => {
 
 /* Slice */
 const initialState = {
-  loggedInUserToken: null,
+  loggedInUser:null,
   status: "idle",
   error: null,
   userChecked: false,
@@ -76,8 +76,8 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     resetAuth:(state)=>{
-      state.loggedInUserToken = null;
       state.status = "idle";
+      state.loggedInUser = null;
       state.error = null;
       state.mailSent = false;
       state.passwordReset = false;
@@ -91,7 +91,7 @@ const authSlice = createSlice({
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.loggedInUserToken = action.payload;
+        state.loggedInUser = action.payload
       })
       .addCase(createUserAsync.rejected, (state, action) => {
         state.status = "rejected";
@@ -103,11 +103,12 @@ const authSlice = createSlice({
       })
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.loggedInUserToken = action.payload;
+        state.loggedInUser = action.payload
       })
       .addCase(loginUserAsync.rejected, (state, action) => {
         state.status = 'rejected';
         state.error = action.payload;
+        console.log(state.error);
       })
       .addCase(resetPasswordRequestAsync.pending, (state) => {
         state.error = null;
@@ -138,8 +139,8 @@ const authSlice = createSlice({
 });
 
 export const {resetAuth} = authSlice.actions;
-export const selectLoggedInUser = (state) => state.auth.loggedInUserToken;
 export const selectError = (state) => state.auth.error;
+export const selectLoggedInUser = (state) => state.auth.loggedInUser
 export const selectMailSent = (state) => state.auth.mailSent;
 export const selectPasswordReset = (state) => state.auth.passwordReset;
 export const selectStatus = (state) => state.auth.status;

@@ -1,37 +1,35 @@
 /* eslint-disable react/prop-types */
 import { Disclosure } from "@headlessui/react";
-import {
-  MinusIcon,
-  PlusIcon,
-} from "@heroicons/react/20/solid";
+import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 
 function DesktopFilter({ handleFilter, filters }) {
-    return (
-      <form className="hidden lg:block">
-        {filters?.map((section) => (
-          <Disclosure
-            as="div"
-            key={section?.id}
-            className="py-6 px-3 mt-2 shadow-filter">
-            {({ open }) => (
-              <>
-                <h3 className="-my-3 flow-root">
-                  <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                    <span className="font-medium text-gray-900">
-                      {section?.name}
-                    </span>
-                    <span className="ml-6 flex items-center">
-                      {open ? (
-                        <MinusIcon className="h-5 w-5" aria-hidden="true" />
-                      ) : (
-                        <PlusIcon className="h-5 w-5" aria-hidden="true" />
-                      )}
-                    </span>
-                  </Disclosure.Button>
-                </h3>
-                <Disclosure.Panel className="pt-6">
-                  <div className="space-y-4">
-                    {section?.options?.map((option, optionIdx) => (
+  return (
+    <form className="hidden lg:block">
+      {filters?.map((section) => (
+        <Disclosure
+          as="div"
+          key={section?.id}
+          className="py-6 px-3 mt-2 shadow-filter">
+          {({ open }) => (
+            <>
+              <h3 className="-my-3 flow-root">
+                <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                  <span className="font-medium text-gray-900">
+                    {section?.name}
+                  </span>
+                  <span className="ml-6 flex items-center">
+                    {open ? (
+                      <MinusIcon className="h-5 w-5" aria-hidden="true" />
+                    ) : (
+                      <PlusIcon className="h-5 w-5" aria-hidden="true" />
+                    )}
+                  </span>
+                </Disclosure.Button>
+              </h3>
+              <Disclosure.Panel className="pt-6">
+                <div className="space-y-4">
+                  {section?.options?.map((option, optionIdx) => {
+                    return (
                       <div key={option?.value} className="flex items-center">
                         <input
                           id={`filter-${section?.id}-${optionIdx}`}
@@ -48,15 +46,16 @@ function DesktopFilter({ handleFilter, filters }) {
                           {option?.label}
                         </label>
                       </div>
-                    ))}
-                  </div>
-                </Disclosure.Panel>
-              </>
-            )}
-          </Disclosure>
-        ))}
-      </form>
-    );
-  }
+                    );
+                  })}
+                </div>
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+      ))}
+    </form>
+  );
+}
 
-export default DesktopFilter
+export default DesktopFilter;

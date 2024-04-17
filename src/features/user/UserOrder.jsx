@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchLoggedInUserOrderAsync,
   selectStatus,
-  selectOrders
+  selectOrders,
 } from "../order/orderSlice";
 import { Grid } from "react-loader-spinner";
 import { updateOrderAsync } from "../order/orderSlice";
@@ -16,7 +16,7 @@ function UserOrder() {
   const orders = useSelector(selectOrders);
   const status = useSelector(selectStatus);
   const [openModal, setOpenModal] = useState(false);
-  const [deleteOrderId, setDeleteOrderId ] = useState();
+  const [deleteOrderId, setDeleteOrderId] = useState();
 
   useEffect(() => {
     dispatch(fetchLoggedInUserOrderAsync());
@@ -35,26 +35,38 @@ function UserOrder() {
             <div key={index}>
               <div>
                 <div className="sm:shadow-custom relative mx-auto mt-6 mb-2 sm:mt-9 sm:mb-3 bg-white max-w-7xl px-4 sm:px-6 lg:px-8 rounded-md ">
-                {!( order?.status === "delivered" ||
-                        order?.status === "cancelled" || order?.status === "failed"
-                      ) && (
-                        <button
-                          className="text-sm  py-1 absolute right-2 top-11 sm:right-16 px-2 bg-red-600 rounded-sm text-white hover:bg-red-400"
-                          onClick={() => {
-                            setDeleteOrderId(order.id)
-                            setOpenModal(true)
-                            }}>
-                          Cancel
-                        </button>
-                      )}
+                  {!(
+                    order?.status === "delivered" ||
+                    order?.status === "cancelled" ||
+                    order?.status === "failed"
+                  ) && (
+                    <button
+                      className="text-sm  py-1 absolute right-2 top-11 sm:right-16 px-2 bg-red-600 rounded-sm text-white hover:bg-red-400"
+                      onClick={() => {
+                        setOpenModal(false);
+                        setTimeout(() => {
+                          setDeleteOrderId(order.id);
+                          setOpenModal(true);
+                        }, 100);
+                      }}>
+                      Cancel
+                    </button>
+                  )}
                   <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                      <h1 className="text-lg sm:text-2xl my-5 font-bold tracking-tight text-gray-900">
-                        Order # {order.id}
-                      </h1>
+                    <h1 className="text-lg sm:text-2xl my-5 font-bold tracking-tight text-gray-900">
+                      Order # {order.id}
+                    </h1>
                     <p className="text-sm sm:text-lg -mt-4 mb-2 font-bold tracking-tight text-slate-900">
-                      {order.createdAt && "Order Date : " + new Date(order.createdAt).toLocaleString() }
+                      {order.createdAt &&
+                        "Order Date : " +
+                          new Date(order.createdAt).toLocaleString()}
                     </p>
-                    <h3 className={`text-lg mt-5 font-bold tracking-tight ${ ("failed cancelled".includes(order?.status)) ? "text-red-900" : "text-green-700"}`} >
+                    <h3
+                      className={`text-lg mt-5 font-bold tracking-tight ${
+                        "failed cancelled".includes(order?.status)
+                          ? "text-red-900"
+                          : "text-green-700"
+                      }`}>
                       Order Status : {order.status}
                     </h3>
                     <h4 className="text-lg mt-1 mb-5 font-bold tracking-tight text-slate-700">
@@ -65,15 +77,12 @@ function UserOrder() {
                         {order.items.map((item, index) => (
                           <li key={index} className="flex py-6">
                             <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                              <Link
-                                to={`/product-detail/${item.product.id}`}
-                                >
-                              
-                              <img
-                                src={item.product.thumbnail}
-                                alt={item.product.title}
-                                className="h-full w-full object-cover object-center"
-                              />
+                              <Link to={`/product-detail/${item.product.id}`}>
+                                <img
+                                  src={item.product.thumbnail}
+                                  alt={item.product.title}
+                                  className="h-full w-full object-cover object-center"
+                                />
                               </Link>
                             </div>
 

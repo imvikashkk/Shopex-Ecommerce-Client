@@ -8,7 +8,6 @@ import {
   changePassword,
 } from "./userAPI";
 
-
 export const fetchLoggedInUserAsync = createAsyncThunk(
   "user/fetchLoggedInUser",
   async () => {
@@ -61,13 +60,19 @@ export const removeAddressAsync = createAsyncThunk(
 const initialState = {
   status: "idle",
   userInfo: null,
-  orders:[]
+  orders: [],
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    resetUser: (state) => {
+      state.status = "idle";
+      state.userInfo = null;
+      state.orders = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(updateUserAsync.pending, (state) => {
@@ -81,11 +86,11 @@ export const userSlice = createSlice({
       })
       .addCase(changePasswordAsync.fulfilled, (state) => {
         state.status = "idle";
-        window.alert("Password Changed Successfully !")
+        window.alert("Password Changed Successfully !");
       })
       .addCase(changePasswordAsync.rejected, (state) => {
         state.status = "idle";
-        window.alert("Something wrong !")
+        window.alert("Something wrong !");
       })
       .addCase(addAddressAsync.pending, (state) => {
         state.status = "loading";
@@ -115,6 +120,7 @@ export const userSlice = createSlice({
   },
 });
 
+export const {resetUser} = userSlice.actions;
 export const selectUserOrders = (state) => state.user.orders;
 export const selectUserInfo = (state) => state.user.userInfo;
 export const selectUserInfoStatus = (state) => state.user.status;

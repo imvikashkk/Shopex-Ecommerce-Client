@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import {
-  selectLoggedInUser,
   createUserAsync,
   selectStatus,
   selectError,
@@ -13,7 +12,7 @@ import { Navigate } from "react-router-dom";
 
 export default function Signup() {
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const user = localStorage.getItem("authorization");
   const status = useSelector(selectStatus);
   const error = useSelector(selectError);
 
