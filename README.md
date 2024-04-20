@@ -4,7 +4,8 @@
 [https://shopexnow.vercel.app/](https://shopexnow.vercel.app/ "https://shopexnow.vercel.app/")
 
 Backend Code
-[https://api-shopexnow.vercel.app](https://github.com/imvikashkk/Shopex-Ecommerce-Server/ "Server Code (Expressjs Nodejs)")
+[https://github.com/imvikashkk/Shopex-Ecommerce-Server](https://github.com/imvikashkk/Shopex-Ecommerce-Server/ "Server Code (Expressjs Nodejs)")
+
 Backend vercel hosting
 [https://api-shopexnow.vercel.app](https://api-shopexnow.vercel.app/ "https://api-shopexnow.vercel.app/")
 
